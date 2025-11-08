@@ -1,0 +1,17 @@
+# Ignore all PNG image files
+*.png
+
+# Ignore all image files 
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.svg
+*.ico
+
+# Ignore PDF files 
+*.pdf
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db

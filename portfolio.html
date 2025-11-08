@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Lewwandi Vithanage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --accent: #0ea5e9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: white;
+            color: var(--dark);
+            padding: 2rem;
+            margin-top: 70px;
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-content .role {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .social-links {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.social-links a {
+    color: #000000;
+    font-size: 28px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #4a90e2;
+    transform: translateY(-3px);
+}
+
+.social-links i {
+    font-size: 28px;
+}
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            animation: center;
+        }
+
+       .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 60%;
+            object-fit: cover;
+            border: 5px solid #e8e8e8;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            display: block;
+        }
+
+
+        @media (max-width: 768px) {
+            .profile-img {
+              width: 200px;
+              height: 200px;
+              border: 4px solid #e8e8e8;
+            }
+        } 
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.0rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        /* .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        } */
+
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.75rem;
+            top: 1.5rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid var(--light);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+
+        .timeline-item ul {
+            margin: 15px 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .timeline-item ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+
+         /* Projects Section */
+.project-card {
+    display: flex;
+    gap: 20px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    padding: 20px;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.project-image {
+    flex-shrink: 0;
+    width: 250px;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-content h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.project-status {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.project-tech {
+    color: var(--gray);
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.project-content p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.project-link:hover {
+    color: var(--accent);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 10px;
+}
+
+.tech-tag {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.codebase-note {
+    color: var(--gray);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-card {
+        flex-direction: column;
+    }
+    
+    .project-image {
+        width: 100%;
+        height: 200px;
+    }
+}
+        /* Education Section */
+        #education {
+            background: var(--light);
+        }
+
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .institution {
+            color: var(--gray);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+       
+
+        /* Contact Section */
+        #contact {
+            background: #0f172a;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .contact-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            margin-bottom: 0.8rem;
+            font-size: 1.0rem;
+        }
+
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero .container,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Lewwandi Vithanage</h1>
+                <p class="role">Associate Software Engineer</p>
+                <p>I am a final-year Electronics and Telecommunication Engineering undergraduate at General Sir John Kotelawala Defence University, currently serving
+                    as an Associate Software Engineer at Zindhu Business Solutions.Driven by a passion for Machine Learning and Computer Vision, actively advancing
+                    my expertise in Natural Language Processing and Deep Neural Network architectures. 
+                    I bridge academic knowledge with practical software engineering to build intelligent systems, utilizing modern AI frameworks and programming skills 
+                    to deliver innovative solutions that tackle meaningful real-world challenges.
+                </p>
+
+<div class="social-links">
+    <a href="mailto:leww8911@gmail.com" target="_blank" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://github.com/lewwandi" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/lewwandi-vithanage/" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://x.com/lewwandi89" target="_blank" aria-label="X">
+    <i class="fa-brands fa-x-twitter"></i>
+</a>
+</div>
+                <div class="cta-buttons">
+                    <button onclick="downloadCV()" class="btn btn-outline">Download CV</button>
+                </div>
+
+                <script>
+                    // Download CV function
+                   function downloadCV() {
+                   // Path to your PDF file (make sure it's in the same directory or adjust the path)
+                        const pdfPath = 'C:/MY/Lewwandi Vithanage.pdf';
+    
+                        const a = document.createElement('a');
+                        a.href = pdfPath;
+                        a.download = 'Lewwandi_Vithanage_CV.pdf';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                </script>
+            </div>
+            <div class="hero-image">
+                <img src="C:\Users\lewwandi\Downloads\me.jpeg"  class="profile-img">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Experience Section -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Associate Software Engineer</h3>
+                <p class="date">April 2024 - Present</p>
+                <p><strong>Zindhu Business Solutions (Pvt) Ltd</strong></p>
+                <ul>
+                    <li>Implemented container orchestration for backend using AWS EKS and Docker for microservices deployment</li>
+                    <li>Developed a real-time vehicle tracking system for E-commerce platform using React.js frontend and Node.js backend, implemented RESTful APIs for live location sharing and tracking</li>
+                    <li>Built a data analytics web application to visualize monthly vessel monitoring system package activation data</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Software Development Intern</h3>
+                <p class="date">October 2024 - March 2025</p>
+                <p><strong>Zindhu Business Solutions (Pvt) Ltd</strong></p>
+                <ul>
+                    <li>Developed APIs for each service using Node.js and validated their functionality through comprehensive testing with Postman</li>
+                    <li>Developed and debugged an E-commerce platform using Node.js backend and React.js responsive frontend</li>
+                    <li>Configured AWS S3 bucket management and IAM user roles/permissions for EKS</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                  <div class="project-image">
+                     <img src="project1.png" alt="Multiple Textured Human Mesh Reconstruction using a Single Moncular Image">
+                  </div>
+                  <div class="project-content">
+                     <h3>Multiple Textured Human Mesh Reconstruction using a Single Moncular Image</h3>
+                     <p>Developed end to end pipeline using deep neural netwroks for reconstructing detailed 3D human meshes with multiple textures from single RGB image. 
+                        Implemented advanced computer vision techniques for pose estimation, mesh generation, and texture mapping to create photorealistic 
+                        3D human models.</p>
+                     <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pytorch</span>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">3D Mesh Reconstruction</span>
+                     </div>
+                     
+                  </div>
+                </div>
+               <div class="project-card">
+                  <div class="project-image">
+                     <img src="frontend.png" alt="Multiple Textured Human Mesh Reconstruction using a Single Moncular Image">
+                  </div>
+                  <div class="project-content">
+                     <h3>Sentiment Analysis Web Application</h3>
+                     <p>Developed a full-stack sentiment analysis web application that classifies user-input text into positive, negative, or neutral sentiments. 
+                        Utilized Natural Language Processing (NLP) techniques and machine learning algorithms to analyze text data and provide real-time sentiment 
+                        feedback through an intuitive web interface.
+                    </p>
+                     <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NLTK</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Scikit learn</span>
+                     </div>
+                     <div class="project-links">
+                        <a href="https://github.com/lewwandi/Sentiment-Analysis-project" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                     </div>
+                  </div>
+                </div>
+                <div class="project-card">
+                  <div class="project-image">
+                     <img src="prediction.png" alt="Multiple Textured Human Mesh Reconstruction using a Single Moncular Image">
+                  </div>
+                  <div class="project-content">
+                     <h3>Heart Diseace Prediction Web Application</h3>
+                     <p>Developed full stack web application to predict the likelihood of heart disease in patients based on various health parameters.
+                        Implemented machine learning algorithm to analyze patient data and provide real-time predictions through an intuitive web interface.
+                    </p>
+                     <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">JSON Web Tokens</span>
+                        <span class="tech-tag">MERN stack</span>
+                     </div>
+                     <div class="project-links">
+                        <a href="https://github.com/lewwandi/Heart-Disease-Prediction-App" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                     </div>
+                  </div>
+                </div>
+                <div class="project-card">
+                  <div class="project-image">
+                     <img src="embedded.png" alt="Multiple Textured Human Mesh Reconstruction using a Single Moncular Image">
+                  </div>
+                  <div class="project-content">
+                     <h3>Voice Assisted AI Chatbot on Raspberry Pi: Embedded AI System</h3>
+                     <p>Developed voice controlled chatbot integrating speech recognition(Whisper) & Gemini LLM on Raspberry Pi. 
+                        Enabled real time natural conversation flow speech to text and text to speech capabilities.
+                    </p>
+                     <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Whisper</span>
+                        <span class="tech-tag">Google Gemini API</span>
+                        <span class="tech-tag">Raspberry Pi</span>
+                     </div>
+                     <div class="project-links">
+                        <a href="https://github.com/lewwandi/ChatBot" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                     </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>Bsc (Hons) in Electronic and Telecommunication Engineering</h3>
+                    <p class="institution">General Sir John Kotelwala Defence University</p>
+                    <p class="date">2022 - 2025 (Expected)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <p>Excited to collaborate on cutting-edge AI projects and transform ideas into intelligent solutions.</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LU Vithanage. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+                
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
